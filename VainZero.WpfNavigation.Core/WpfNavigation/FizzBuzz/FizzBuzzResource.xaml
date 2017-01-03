@@ -1,0 +1,15 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:fizzBuzz="clr-namespace:VainZero.WpfNavigation.FizzBuzz"
+    >
+    <DataTemplate DataType="{x:Type fizzBuzz:FizzBuzzCollection}">
+        <ItemsControl ItemsSource="{Binding Items}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Style="{StaticResource LargeTextBlockStyle}" Text="{Binding}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </DataTemplate>
+</ResourceDictionary>
