@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNetKit.Core, Version=1.0.0.1104, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetKit.Core.1.0.1\lib\netstandard10\DotNetKit.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="ReactiveProperty, Version=3.4.0.0, Culture=neutral, processorArchitecture=MSIL">
