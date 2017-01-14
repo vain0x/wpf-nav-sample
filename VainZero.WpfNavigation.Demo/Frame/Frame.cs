@@ -24,6 +24,8 @@ namespace VainZero.WpfNavigation.Demo
         public ICommand<Unit> NavigateBackCommand { get; }
         public ICommand<Unit> NavigateForwardCommand { get; }
 
+        public ICommand<Unit> OnNavigatedCommand { get; }
+
         public Frame()
         {
             var front = new LoginPage();
@@ -33,6 +35,8 @@ namespace VainZero.WpfNavigation.Demo
 
             NavigateBackCommand = Navigator.NavigateBackCommand.PartiallyApply(1);
             NavigateForwardCommand = Navigator.NavigateForwardCommand.PartiallyApply(1);
+
+            OnNavigatedCommand = new UnitCommand(() => Navigator.RaiseNavigated());
         }
     }
 }

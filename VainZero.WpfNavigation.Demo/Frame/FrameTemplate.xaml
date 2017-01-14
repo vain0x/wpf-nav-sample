@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vainZeroControls="clr-namespace:VainZero.Windows.Controls;assembly=VainZero.WpfNavigation.Core"
     xmlns:demo="clr-namespace:VainZero.WpfNavigation.Demo"
     >
     <DataTemplate DataType="{x:Type demo:Frame}">
@@ -39,9 +40,10 @@
                             />
                     </Grid>
 
-                    <ContentPresenter
+                    <vainZeroControls:NavigationFrame
                         Grid.Row="1"
                         Content="{Binding Content.Value}"
+                        OnNavigatedCommand="{Binding OnNavigatedCommand}"
                         />
                 </Grid>
             </Grid>
