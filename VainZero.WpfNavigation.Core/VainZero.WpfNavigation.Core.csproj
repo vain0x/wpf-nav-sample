@@ -90,6 +90,9 @@
     <Compile Include="Functional\Commands\MulticastCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Functional\Commands\DisjunctiveCommand.cs" />
+    <Compile Include="Reactive\Commands\ICommand.cs" />
+    <Compile Include="Reactive\Commands\IRaisableCommand.cs" />
+    <Compile Include="Reactive\Commands\RaisableCommandFactory.cs" />
     <Compile Include="WpfNavigation\FizzBuzz\FizzBuzzCollection.cs" />
     <Compile Include="Windows\Navigation\EmptyNavigatable.cs" />
     <Compile Include="Windows\Navigation\INavigatable.cs" />
