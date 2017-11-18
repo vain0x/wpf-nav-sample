@@ -35,11 +35,7 @@ namespace VainZero.WpfNavigation.Demo.Users
         }
 
         public static User[] SampleUsers { get; } =
-            new[]
-            {
-                new User("John Due", "john_due", new DateTime(1999, 12, 31)),
-                new User("Vain Zero", "vain0", new DateTime(2000, 01, 01)),
-            };
+            Enumerable.Range(0, 200).Select(i => new User($"User {i}", i.ToString(), DateTime.Now)).ToArray();
 
         public UserListPage()
             : this(SampleUsers.ToDictionary(user => user.UserId))
