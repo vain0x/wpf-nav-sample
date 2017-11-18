@@ -1,0 +1,35 @@
+<UserControl
+    x:Class="VainZero.WpfNavigationDemo.Views.FrontPages.FrontPageControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:layoutFrames="clr-namespace:VainZero.WpfNavigationDemo.Views.LayoutFrames"
+    xmlns:local="clr-namespace:VainZero.WpfNavigationDemo.Views.FrontPages"
+    mc:Ignorable="d" 
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    >
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <Menu.Resources>
+                <Style TargetType="{x:Type MenuItem}">
+                    <Setter Property="Padding" Value="8,0,8,0" />
+                    <Setter Property="MinWidth" Value="80" />
+                </Style>
+            </Menu.Resources>
+
+            <MenuItem
+                Header="Users"
+                Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource AncestorType={x:Type layoutFrames:LayoutFrameControl}}}"
+                CommandParameter="{Binding UserListRequest}"
+                />
+
+            <MenuItem Header="Config" IsEnabled="False" />
+            <MenuItem Header="Settings" IsEnabled="False" />
+            <MenuItem Header="Preferences" IsEnabled="False" />
+        </Menu>
+
+        <TextBlock Text="Hello, world!" />
+    </DockPanel>
+</UserControl>

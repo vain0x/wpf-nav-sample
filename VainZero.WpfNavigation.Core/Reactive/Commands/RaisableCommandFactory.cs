@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using DotNetKit.Misc;
 
 namespace VainZero.Reactive.Commands
 {
@@ -53,7 +53,7 @@ namespace VainZero.Reactive.Commands
             {
                 if (ParameterTypeIsUnit())
                 {
-                    return CanExecute((TParameter)(object)Unit.Default);
+                    return CanExecute((TParameter)(object)default(Unit));
                 }
                 else
                 {
@@ -75,7 +75,7 @@ namespace VainZero.Reactive.Commands
             {
                 if (ParameterTypeIsUnit())
                 {
-                    Execute((TParameter)(object)Unit.Default);
+                    Execute((TParameter)(object)default(Unit));
                 }
                 else
                 {

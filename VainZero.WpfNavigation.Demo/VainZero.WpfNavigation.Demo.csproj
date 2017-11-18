@@ -7,7 +7,7 @@
     <ProjectGuid>{A8CD5F99-7715-4303-9E3E-FFDA705B50D7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VainZero.WpfNavigation.Demo</RootNamespace>
+    <RootNamespace>VainZero</RootNamespace>
     <AssemblyName>VainZero.WpfNavigation.Demo</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -90,51 +90,69 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="WpfNavigationDemo\Views\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Users\User.cs" />
-    <Compile Include="Users\UserDetailPage.cs" />
-    <Compile Include="Users\UserListPage.cs" />
-    <Compile Include="Users\UserUpdatable.cs" />
-    <Page Include="Frame\FrameTemplate.xaml">
+    <Compile Include="WpfNavigationDemo\Models\Model.cs" />
+    <Compile Include="WpfNavigationDemo\Views\FrontPages\FrontPage.cs" />
+    <Compile Include="WpfNavigationDemo\Views\FrontPages\FrontPageControl.xaml.cs">
+      <DependentUpon>FrontPageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfNavigationDemo\Views\LayoutFrames\ILayoutPage.cs" />
+    <Compile Include="WpfNavigationDemo\Views\LayoutFrames\INavigationRequest.cs" />
+    <Compile Include="WpfNavigationDemo\Views\LayoutFrames\LayoutFrameControl.xaml.cs">
+      <DependentUpon>LayoutFrameControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfNavigationDemo\Views\LayoutFrames\Navigator.cs" />
+    <Compile Include="WpfNavigationDemo\Views\LoginPages\LoginPage.cs" />
+    <Compile Include="WpfNavigationDemo\Views\LoginPages\LoginPageControl.xaml.cs">
+      <DependentUpon>LoginPageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfNavigationDemo\Models\Users\User.cs" />
+    <Compile Include="WpfNavigationDemo\Views\Users\Editing\UserEditPage.cs" />
+    <Compile Include="WpfNavigationDemo\Views\Users\Editing\UserEditPageControl.xaml.cs">
+      <DependentUpon>UserEditPageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfNavigationDemo\Views\Users\Lists\UserListPage.cs" />
+    <Compile Include="WpfNavigationDemo\Views\Users\Lists\UserListPageControl.xaml.cs">
+      <DependentUpon>UserListPageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfNavigationDemo\Views\Users\Editing\User.cs" />
+    <Page Include="WpfNavigationDemo\Views\AppResourceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Frame\HistoryTemplate.xaml">
+    <Page Include="WpfNavigationDemo\Views\FrontPages\FrontPageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Front\LoginPageTemplate.xaml">
+    <Page Include="WpfNavigationDemo\Views\LayoutFrames\LayoutFrameControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Front\MenuPageTemplate.xaml">
+    <Page Include="WpfNavigationDemo\Views\LoginPages\LoginPageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="WpfNavigationDemo\Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
+    <Compile Include="WpfNavigationDemo\Views\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Frame\Frame.cs" />
-    <Compile Include="Frame\History.cs" />
-    <Compile Include="Front\LoginPage.cs" />
-    <Compile Include="Front\MenuPage.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="WpfNavigationDemo\Views\LayoutFrames\LayoutFrame.cs" />
+    <Compile Include="WpfNavigationDemo\Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Users\UserDetailPageTemplate.xaml">
+    <Page Include="WpfNavigationDemo\Views\Users\Editing\UserEditPageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Users\UserListPageTemplate.xaml">
+    <Page Include="WpfNavigationDemo\Views\Users\Lists\UserListPageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -143,25 +161,7 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
