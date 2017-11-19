@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace VainZero.WpfNavigationDemo.Views.LayoutFrames
 {
-    public interface INavigationRequest
+    public interface INavigateRequest
     {
         ILayoutPage CreatePage();
     }
 
-    public sealed class NavigationRequest
-        : INavigationRequest
+    public sealed class NavigateRequest
+        : INavigateRequest
     {
         private Func<ILayoutPage> _pageCreator;
         public ILayoutPage CreatePage()
@@ -20,7 +20,7 @@ namespace VainZero.WpfNavigationDemo.Views.LayoutFrames
             return _pageCreator();
         }
 
-        public NavigationRequest(Func<ILayoutPage> pageCreator)
+        public NavigateRequest(Func<ILayoutPage> pageCreator)
         {
             _pageCreator = pageCreator;
         }

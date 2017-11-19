@@ -15,12 +15,12 @@ namespace VainZero.WpfNavigationDemo.Views.FrontPages
     {
         public string PageTitle => "Front";
 
-        public L.INavigationRequest UserListRequest { get; }
+        public L.INavigateRequest UserListRequest { get; }
 
         public FrontPage(M.Model model)
         {
             UserListRequest =
-                new L.NavigationRequest(() =>
+                new L.NavigateRequest(() =>
                     new Users.Lists.UserListPage(model)
                 );
         }

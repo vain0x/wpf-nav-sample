@@ -18,13 +18,13 @@ namespace VainZero.WpfNavigationDemo.Views.Users.Editing
 
         public User User { get; }
 
-        public L.INavigationRequest SaveRequest { get; }
+        public L.INavigateRequest SaveRequest { get; }
 
         public UserEditPage(MU.User user, M.Model model)
         {
             User = new User(user);
 
-            SaveRequest = new L.NavigationRequest(() =>
+            SaveRequest = new L.NavigateRequest(() =>
             {
                 model.UserRepository.Save(User.MakeReadOnly());
                 return new Lists.UserListPage(model);

@@ -70,9 +70,9 @@
     <Compile Include="WpfNavigationDemo\Views\FrontPages\FrontPageControl.xaml.cs">
       <DependentUpon>FrontPageControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WpfNavigationDemo\Views\LayoutFrames\NavigationRequestCreateMultiValueConverter.cs" />
+    <Compile Include="WpfNavigationDemo\Views\LayoutFrames\NavigateRequestCreateMultiValueConverter.cs" />
     <Compile Include="WpfNavigationDemo\Views\LayoutFrames\ILayoutPage.cs" />
-    <Compile Include="WpfNavigationDemo\Views\LayoutFrames\INavigationRequest.cs" />
+    <Compile Include="WpfNavigationDemo\Views\LayoutFrames\INavigateRequest.cs" />
     <Compile Include="WpfNavigationDemo\Views\LayoutFrames\LayoutFrameControl.xaml.cs">
       <DependentUpon>LayoutFrameControl.xaml</DependentUpon>
     </Compile>

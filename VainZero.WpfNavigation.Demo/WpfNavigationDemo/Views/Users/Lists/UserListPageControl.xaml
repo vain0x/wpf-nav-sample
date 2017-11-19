@@ -27,7 +27,7 @@
                             Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource AncestorType={x:Type layoutFrames:LayoutFrameControl}}}"
                             >
                             <Button.CommandParameter>
-                                <MultiBinding Converter="{x:Static layoutFrames:NavigationRequestCreateMultiValueConverter.Instance}">
+                                <MultiBinding Converter="{x:Static layoutFrames:NavigateRequestCreateMultiValueConverter.Instance}">
                                     <Binding
                                         Path="DataContext.EditRequestFactory"
                                         ElementName="_dataGrid"

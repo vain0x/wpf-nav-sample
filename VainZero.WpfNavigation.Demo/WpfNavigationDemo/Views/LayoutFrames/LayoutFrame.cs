@@ -17,7 +17,7 @@ namespace VainZero.WpfNavigationDemo.Views.LayoutFrames
 
         public ILayoutPage Content => Navigator.Current;
 
-        private void Navigate(INavigationRequest request)
+        private void Navigate(INavigateRequest request)
         {
             var page = request.CreatePage();
             if (page == null) return;
@@ -30,7 +30,7 @@ namespace VainZero.WpfNavigationDemo.Views.LayoutFrames
             NavigateForwardCommand.Refresh();
         }
 
-        public IRaisableCommand<INavigationRequest> NavigateCommand { get; }
+        public IRaisableCommand<INavigateRequest> NavigateCommand { get; }
         public IRaisableCommand<Unit> NavigateBackCommand { get; }
         public IRaisableCommand<Unit> NavigateForwardCommand { get; }
 
@@ -45,7 +45,7 @@ namespace VainZero.WpfNavigationDemo.Views.LayoutFrames
             Navigator = new Navigator<ILayoutPage>(initialPage);
 
             NavigateCommand =
-                commandFactory.Create<INavigationRequest>(
+                commandFactory.Create<INavigateRequest>(
                     Navigate,
                     _ => true
                 );

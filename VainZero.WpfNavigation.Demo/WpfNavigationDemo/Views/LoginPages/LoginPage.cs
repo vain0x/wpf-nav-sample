@@ -46,13 +46,13 @@ namespace VainZero.WpfNavigationDemo.Views.LoginPages
             }
         }
 
-        public L.INavigationRequest LoginRequest { get; }
+        public L.INavigateRequest LoginRequest { get; }
 
         public LoginPage(M.Model model)
         {
             _authenticator = new MU.UserAuthenticator(model.UserRepository);
 
-            LoginRequest = new L.NavigationRequest(() =>
+            LoginRequest = new L.NavigateRequest(() =>
             {
                 MU.AuthenticatedUser authenticatedUser;
                 if (_authenticator.Authenticate(Email, Password, out authenticatedUser))

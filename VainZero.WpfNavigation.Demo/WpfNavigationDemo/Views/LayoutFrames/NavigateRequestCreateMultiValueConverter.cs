@@ -9,7 +9,7 @@ using System.Windows.Data;
 
 namespace VainZero.WpfNavigationDemo.Views.LayoutFrames
 {
-    public sealed class NavigationRequestCreateMultiValueConverter
+    public sealed class NavigateRequestCreateMultiValueConverter
         : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
@@ -29,37 +29,37 @@ namespace VainZero.WpfNavigationDemo.Views.LayoutFrames
             throw new NotSupportedException();
         }
 
-        public static NavigationRequestCreateMultiValueConverter Instance { get; } =
-            new NavigationRequestCreateMultiValueConverter();
+        public static NavigateRequestCreateMultiValueConverter Instance { get; } =
+            new NavigateRequestCreateMultiValueConverter();
     }
 
     public interface INavigateRequestFactory
     {
-        INavigationRequest Create(object parameter);
+        INavigateRequest Create(object parameter);
     }
 
     public interface INavigateRequestFactory<in TParameter>
         : INavigateRequestFactory
     {
-        INavigationRequest Create(TParameter parameter);
+        INavigateRequest Create(TParameter parameter);
     }
 
     public sealed class AnonymousNavigateFactory<TParameter>
         : INavigateRequestFactory<TParameter>
     {
-        private readonly Func<TParameter, INavigationRequest> _create;
+        private readonly Func<TParameter, INavigateRequest> _create;
 
-        public INavigationRequest Create(TParameter parameter)
+        public INavigateRequest Create(TParameter parameter)
         {
             return _create(parameter);
         }
 
-        INavigationRequest INavigateRequestFactory.Create(object parameter)
+        INavigateRequest INavigateRequestFactory.Create(object parameter)
         {
             return Create((TParameter)parameter);
         }
 
-        public AnonymousNavigateFactory(Func<TParameter, INavigationRequest> create)
+        public AnonymousNavigateFactory(Func<TParameter, INavigateRequest> create)
         {
             _create = create;
         }

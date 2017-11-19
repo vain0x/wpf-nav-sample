@@ -29,7 +29,7 @@ namespace VainZero.WpfNavigationDemo.Views.Users.Lists
 
             EditRequestFactory =
                 new L.AnonymousNavigateFactory<MU.User>(user =>
-                    new L.NavigationRequest(() =>
+                    new L.NavigateRequest(() =>
                         new Editing.UserEditPage(user, model)
                     ));
         }
