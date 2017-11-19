@@ -10,7 +10,8 @@
     d:DesignHeight="300"
     >
     <DataGrid
-        ItemsSource="{Binding Items}"
+        x:Name="_dataGrid"
+        ItemsSource="{Binding Users}"
         IsReadOnly="True"
         AutoGenerateColumns="False"
         >
@@ -24,8 +25,19 @@
                         <Button
                             Content="Edit"
                             Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource AncestorType={x:Type layoutFrames:LayoutFrameControl}}}"
-                            CommandParameter="{Binding EditRequest}"
-                            />
+                            >
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{x:Static layoutFrames:NavigationRequestCreateMultiValueConverter.Instance}">
+                                    <Binding
+                                        Path="DataContext.EditRequestFactory"
+                                        ElementName="_dataGrid"
+                                        />
+                                    <Binding
+                                        Path="User"
+                                        />
+                                </MultiBinding>
+                            </Button.CommandParameter>
+                        </Button>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
