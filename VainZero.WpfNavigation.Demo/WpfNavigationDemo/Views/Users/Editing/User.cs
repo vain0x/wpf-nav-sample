@@ -11,7 +11,7 @@ namespace VainZero.WpfNavigationDemo.Views.Users.Editing
     public sealed class User
         : BindableBase
     {
-        private long _id;
+        private readonly long _id;
 
         private string _name;
         public string Name
