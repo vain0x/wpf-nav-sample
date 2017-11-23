@@ -8,6 +8,47 @@
     xmlns:userEditing="clr-namespace:VainZero.WpfNavigationDemo.Views.Users.Editing"
     xmlns:userLists="clr-namespace:VainZero.WpfNavigationDemo.Views.Users.Lists"
     >
+    <ResourceDictionary.MergedDictionaries>
+        <!-- MaterialDesign -->
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Styles for UI Elements -->
+
+    <Style x:Key="MaterialDesignWindowStyle" TargetType="{x:Type Window}">
+        <Setter
+            Property="TextElement.Foreground"
+            Value="{DynamicResource MaterialDesignBody}"
+            />
+        <Setter
+            Property="TextElement.FontWeight"
+            Value="Regular"
+            />
+        <Setter
+            Property="TextElement.FontSize"
+            Value="13"
+            />
+        <Setter
+            Property="TextOptions.TextFormattingMode"
+            Value="Ideal"
+            />
+        <Setter
+            Property="TextOptions.TextRenderingMode"
+            Value="Auto"
+            />
+        <Setter
+            Property="Background"
+            Value="{DynamicResource MaterialDesignPaper}"
+            />
+        <Setter
+            Property="FontFamily"
+            Value="{DynamicResource MaterialDesignFont}"
+            />
+    </Style>
+
     <!-- Mapping from view models to views. -->
 
     <DataTemplate DataType="{x:Type loginPages:LoginPage}">
