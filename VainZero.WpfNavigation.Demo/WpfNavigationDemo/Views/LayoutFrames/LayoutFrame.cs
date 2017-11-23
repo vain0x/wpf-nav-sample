@@ -13,21 +13,58 @@ namespace VainZero.WpfNavigationDemo.Views.LayoutFrames
     public sealed class LayoutFrame
         : BindableBase
     {
-        public Navigator<ILayoutPage> Navigator { get; }
+        sealed class PageChangeNavigation
+            : INavigation
+        {
+            private readonly LayoutFrame _parent;
+            private readonly ILayoutPage _page;
+            private readonly ILayoutPage _previousPage;
 
-        public ILayoutPage Content => Navigator.Current;
+            public string PageTitle => _page.PageTitle;
+
+            public void GoBack()
+            {
+                _parent.Content = _previousPage;
+            }
+
+            public void GoForward()
+            {
+                _parent.Content = _page;
+            }
+
+            public PageChangeNavigation(LayoutFrame parent, ILayoutPage page, ILayoutPage previousPage)
+            {
+                _parent = parent;
+                _page = page;
+                _previousPage = previousPage;
+            }
+        }
+
+        public Navigator<INavigation> Navigator { get; }
+
+        private ILayoutPage _content;
+        public ILayoutPage Content
+        {
+            get => _content;
+            set => SetProperty(ref _content, value);
+        }
+
+        private void RefreshCommands()
+        {
+            NavigateCommand.Refresh();
+            NavigateBackCommand.Refresh();
+            NavigateForwardCommand.Refresh();
+        }
 
         private void Navigate(INavigateRequest request)
         {
             var page = request.CreatePage();
             if (page == null) return;
 
-            Navigator.Navigate(page);
-            RaisePropertyChanged(nameof(Content));
+            var previousPage = _content;
 
-            NavigateCommand.Refresh();
-            NavigateBackCommand.Refresh();
-            NavigateForwardCommand.Refresh();
+            Navigator.Navigate(new PageChangeNavigation(this, page, previousPage));
+            RefreshCommands();
         }
 
         public IRaisableCommand<INavigateRequest> NavigateCommand { get; }
@@ -42,7 +79,9 @@ namespace VainZero.WpfNavigationDemo.Views.LayoutFrames
                     h => CommandManager.RequerySuggested -= h
                 );
 
-            Navigator = new Navigator<ILayoutPage>(initialPage);
+            _content = initialPage;
+
+            Navigator = new Navigator<INavigation>();
 
             NavigateCommand =
                 commandFactory.Create<INavigateRequest>(
@@ -52,21 +91,13 @@ namespace VainZero.WpfNavigationDemo.Views.LayoutFrames
 
             NavigateBackCommand =
                 commandFactory.Create(
-                    () =>
-                    {
-                        Navigator.NavigateBack(1);
-                        RaisePropertyChanged(nameof(Content));
-                    },
+                    () => Navigator.NavigateBack(1),
                     () => Navigator.CanNavigateBack(1)
                 );
 
             NavigateForwardCommand =
                 commandFactory.Create(
-                    () =>
-                    {
-                        Navigator.NavigateForward(1);
-                        RaisePropertyChanged(nameof(Content));
-                    },
+                    () => Navigator.NavigateForward(1),
                     () => Navigator.CanNavigateForward(1)
                 );
         }

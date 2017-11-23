@@ -11,23 +11,21 @@ using System.ComponentModel;
 
 namespace VainZero.WpfNavigationDemo.Views.LayoutFrames
 {
-    public sealed class Navigator<TState>
+    public sealed class Navigator<TNavigation>
+        where TNavigation : INavigation
     {
-        public ObservableCollection<TState> BackEntries { get; } =
-            new ObservableCollection<TState>();
+        public ObservableCollection<TNavigation> BackEntries { get; } =
+            new ObservableCollection<TNavigation>();
 
-        public ObservableCollection<TState> ForwardEntries { get; } =
-            new ObservableCollection<TState>();
+        public ObservableCollection<TNavigation> ForwardEntries { get; } =
+            new ObservableCollection<TNavigation>();
 
-        private TState _current;
-        public TState Current => _current;
-
-        public void Navigate(TState state)
+        public void Navigate(TNavigation navigation)
         {
-            BackEntries.Add(Current);
+            BackEntries.Add(navigation);
             ForwardEntries.Clear();
 
-            _current = state;
+            navigation.GoForward();
         }
 
         public bool CanNavigateBack(int count)
@@ -40,15 +38,13 @@ namespace VainZero.WpfNavigationDemo.Views.LayoutFrames
             if (!CanNavigateBack(count))
                 throw new InvalidOperationException("Couldn't navigate back.");
 
-            ForwardEntries.Add(Current);
-
-            for (var i = 0; i < count - 1; i++)
+            for (var i = 0; i < count; i++)
             {
-                var state = BackEntries.RemoveLast();
-                ForwardEntries.Add(state);
-            }
+                var navigation = BackEntries.RemoveLast();
+                ForwardEntries.Add(navigation);
 
-            _current = BackEntries.RemoveLast();
+                navigation.GoBack();
+            }
         }
 
         public bool CanNavigateForward(int count)
@@ -61,20 +57,18 @@ namespace VainZero.WpfNavigationDemo.Views.LayoutFrames
             if (!CanNavigateForward(count))
                 throw new InvalidOperationException("Couldn't navigate forward.");
 
-            BackEntries.Add(Current);
-
-            for (var i = 0; i < count - 1; i++)
+            for (var i = 0; i < count; i++)
             {
-                var state = ForwardEntries.RemoveLast();
-                BackEntries.Add(state);
+                var navigation = ForwardEntries.RemoveLast();
+                BackEntries.Add(navigation);
+                navigation.GoForward();
             }
-
-            _current = ForwardEntries.RemoveLast();
         }
+    }
 
-        public Navigator(TState initialState)
-        {
-            _current = initialState;
-        }
+    public interface INavigation
+    {
+        void GoForward();
+        void GoBack();
     }
 }
