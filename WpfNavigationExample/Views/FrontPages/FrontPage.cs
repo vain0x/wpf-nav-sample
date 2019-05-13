@@ -9,6 +9,9 @@ using L = WpfNavigationExample.Views.LayoutFrames;
 
 namespace WpfNavigationExample.Views.FrontPages
 {
+    /// <summary>
+    /// The first page shown after sign in.
+    /// </summary>
     public sealed class FrontPage
         : BindableBase
         , L.ILayoutPage

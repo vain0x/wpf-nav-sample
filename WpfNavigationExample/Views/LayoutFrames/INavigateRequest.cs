@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace WpfNavigationExample.Views.LayoutFrames
 {
+    /// <summary>
+    /// Request of navigation to go to new page.
+    /// 
+    /// Bind this to the command parameter of navigate command.
+    /// </summary>
     public interface INavigateRequest
     {
         ILayoutPage CreatePage();

@@ -4,6 +4,13 @@ using System.Collections.ObjectModel;
 
 namespace WpfNavigationExample.Views.LayoutFrames
 {
+    /// <summary>
+    /// History of navigation.
+    /// </summary>
+    /// <typeparam name="TNavigation">
+    /// Type of navigation events.
+    /// You can define *what is navigation* using this type parameter.
+    /// </typeparam>
     public sealed class Navigator<TNavigation>
         where TNavigation : INavigation
     {

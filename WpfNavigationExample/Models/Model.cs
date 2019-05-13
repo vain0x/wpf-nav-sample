@@ -7,6 +7,9 @@ using WpfNavigationExample.Models.Users;
 
 namespace WpfNavigationExample.Models
 {
+    /// <summary>
+    /// Application data and logic, irrelevant to views.
+    /// </summary>
     public sealed class Model
     {
         public UserRepository UserRepository { get; }

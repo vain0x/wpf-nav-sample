@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace WpfNavigationExample.Models.Users
 {
+    /// <summary>
+    /// User representation irrelevant to views.
+    /// </summary>
     public sealed class User
     {
         public long Id { get; }
@@ -22,6 +25,9 @@ namespace WpfNavigationExample.Models.Users
         }
     }
 
+    /// <summary>
+    /// User that has been passed authentication.
+    /// </summary>
     public sealed class AuthenticatedUser
     {
         public User User { get; }
@@ -34,6 +40,9 @@ namespace WpfNavigationExample.Models.Users
         }
     }
 
+    /// <summary>
+    /// Authentication service.
+    /// </summary>
     public sealed class UserAuthenticator
     {
         private readonly UserRepository _repository;
@@ -57,6 +66,11 @@ namespace WpfNavigationExample.Models.Users
         }
     }
 
+    /// <summary>
+    /// Persistent storage for users.
+    ///
+    /// You can think of this as wrapper of `users` table in the database.
+    /// </summary>
     public sealed class UserRepository
     {
         private readonly Dictionary<long, User> _items;

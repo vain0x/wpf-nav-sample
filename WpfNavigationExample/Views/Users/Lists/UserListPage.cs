@@ -28,7 +28,7 @@ namespace WpfNavigationExample.Views.Users.Lists
                 .ToArray();
 
             EditRequestFactory =
-                new L.AnonymousNavigateFactory<MU.User>(user =>
+                new L.NavigateRequestFactory<MU.User>(user =>
                     new L.NavigateRequest(() =>
                         new Editing.UserEditPage(user, model)
                     ));

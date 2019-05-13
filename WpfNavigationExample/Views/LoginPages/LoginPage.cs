@@ -23,27 +23,15 @@ namespace WpfNavigationExample.Views.LoginPages
         private string _email = "u1@example.com";
         public string Email
         {
-            get
-            {
-                return _email;
-            }
-            set
-            {
-                SetProperty(ref _email, value);
-            }
+            get => _email;
+            set => SetProperty(ref _email, value);
         }
 
         private string _password = "password";
         public string Password
         {
-            get
-            {
-                return _password;
-            }
-            set
-            {
-                SetProperty(ref _password, value);
-            }
+            get => _password;
+            set => SetProperty(ref _password, value);
         }
 
         public L.INavigateRequest LoginRequest { get; }
@@ -54,15 +42,12 @@ namespace WpfNavigationExample.Views.LoginPages
 
             LoginRequest = new L.NavigateRequest(() =>
             {
-                MU.AuthenticatedUser authenticatedUser;
-                if (_authenticator.Authenticate(Email, Password, out authenticatedUser))
-                {
-                    return new FrontPages.FrontPage(model);
-                }
-                else
+                if (!_authenticator.Authenticate(Email, Password, out var authenticatedUser))
                 {
                     return null;
                 }
+
+                return new FrontPages.FrontPage(model);
             });
         }
     }

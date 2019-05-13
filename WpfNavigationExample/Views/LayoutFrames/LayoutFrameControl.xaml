@@ -55,14 +55,9 @@
                 HorizontalAlignment="Stretch"
                 />
 
-            <Grid Grid.Column="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-
+            <DockPanel Grid.Column="2">
                 <!-- Title -->
-                <materialDesign:ColorZone Mode="PrimaryDark" Padding="8,4,8,4">
+                <materialDesign:ColorZone DockPanel.Dock="Top" Mode="PrimaryDark" Padding="8,4,8,4">
                     <TextBlock
                         Style="{DynamicResource MaterialDesignTitleTextBlock}"
                         Text="{Binding Content.PageTitle}"
@@ -74,7 +69,7 @@
                     Margin="8,4,8,4"
                     Content="{Binding Content}"
                     />
-            </Grid>
+            </DockPanel>
         </Grid>
 
         <Grid Grid.Row="1">

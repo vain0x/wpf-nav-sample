@@ -10,36 +10,12 @@ using System.Windows.Input;
 
 namespace WpfNavigationExample.Views.LayoutFrames
 {
+    /// <summary>
+    /// Hosts a page and provides commands to go back/forward.
+    /// </summary>
     public sealed class LayoutFrame
         : BindableBase
     {
-        sealed class PageChangeNavigation
-            : INavigation
-        {
-            private readonly LayoutFrame _parent;
-            private readonly ILayoutPage _page;
-            private readonly ILayoutPage _previousPage;
-
-            public string PageTitle => _page.PageTitle;
-
-            public void GoBack()
-            {
-                _parent.Content = _previousPage;
-            }
-
-            public void GoForward()
-            {
-                _parent.Content = _page;
-            }
-
-            public PageChangeNavigation(LayoutFrame parent, ILayoutPage page, ILayoutPage previousPage)
-            {
-                _parent = parent;
-                _page = page;
-                _previousPage = previousPage;
-            }
-        }
-
         public Navigator<INavigation> Navigator { get; }
 
         private ILayoutPage _content;
@@ -99,6 +75,36 @@ namespace WpfNavigationExample.Views.LayoutFrames
                     () => Navigator.NavigateForward(1),
                     () => Navigator.CanNavigateForward(1)
                 );
+        }
+    }
+
+    /// <summary>
+    /// Navigation to replace the page of <see cref="LayoutFrame"/>.
+    /// </summary>
+    sealed class PageChangeNavigation
+        : INavigation
+    {
+        private readonly LayoutFrame _parent;
+        private readonly ILayoutPage _page;
+        private readonly ILayoutPage _previousPage;
+
+        public string PageTitle => _page.PageTitle;
+
+        public void GoBack()
+        {
+            _parent.Content = _previousPage;
+        }
+
+        public void GoForward()
+        {
+            _parent.Content = _page;
+        }
+
+        public PageChangeNavigation(LayoutFrame parent, ILayoutPage page, ILayoutPage previousPage)
+        {
+            _parent = parent;
+            _page = page;
+            _previousPage = previousPage;
         }
     }
 }

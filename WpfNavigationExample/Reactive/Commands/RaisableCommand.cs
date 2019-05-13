@@ -9,6 +9,10 @@ using DotNetKit.Misc;
 
 namespace WpfNavigationExample.Reactive.Commands
 {
+    /// <summary>
+    /// Basic implementation of <see cref="IRaisableCommand{TParameter}"/>.
+    /// </summary>
+    /// <typeparam name="TParameter"></typeparam>
     public sealed class RaisableCommand<TParameter>
         : IRaisableCommand<TParameter>
     {
@@ -55,7 +59,7 @@ namespace WpfNavigationExample.Reactive.Commands
     public static class RaisableCommand
     {
         /// <summary>
-        /// Creates a command.
+        /// Creates a raisable command.
         /// </summary>
         public static IRaisableCommand<P> Create<P>(Action<P> execute, Func<P, bool> canExecute)
         {
@@ -63,7 +67,7 @@ namespace WpfNavigationExample.Reactive.Commands
         }
 
         /// <summary>
-        /// Creates a command with no parameter.
+        /// Creates a raisable command that needs no parameter.
         /// </summary>
         public static IRaisableCommand<Unit> Create(Action execute, Func<bool> canExecute)
         {

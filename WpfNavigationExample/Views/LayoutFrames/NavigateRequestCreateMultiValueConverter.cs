@@ -9,6 +9,15 @@ using System.Windows.Data;
 
 namespace WpfNavigationExample.Views.LayoutFrames
 {
+    /// <summary>
+    /// Converter to produce a <see cref="INavigation"/>.
+    ///
+    /// The parameter must be an array of two items:
+    /// the first must be of <see cref="INavigateRequestFactory"/>,
+    /// and the second is the argument of the factory.
+    ///
+    /// See <see cref="Users.Lists.UserListPageControl"/> for typical usage.
+    /// </summary>
     public sealed class NavigateRequestCreateMultiValueConverter
         : IMultiValueConverter
     {
@@ -33,18 +42,27 @@ namespace WpfNavigationExample.Views.LayoutFrames
             new NavigateRequestCreateMultiValueConverter();
     }
 
+    /// <summary>
+    /// Nongeneric <see cref="INavigateRequestFactory{TParameter}"/>.
+    /// </summary>
     public interface INavigateRequestFactory
     {
         INavigateRequest Create(object parameter);
     }
 
+    /// <summary>
+    /// Function to create an <see cref="INavigateRequest"/>.
+    /// </summary>
+    /// <typeparam name="TParameter">
+    /// The parameter of the function.
+    /// </typeparam>
     public interface INavigateRequestFactory<in TParameter>
         : INavigateRequestFactory
     {
         INavigateRequest Create(TParameter parameter);
     }
 
-    public sealed class AnonymousNavigateFactory<TParameter>
+    public sealed class NavigateRequestFactory<TParameter>
         : INavigateRequestFactory<TParameter>
     {
         private readonly Func<TParameter, INavigateRequest> _create;
@@ -59,7 +77,7 @@ namespace WpfNavigationExample.Views.LayoutFrames
             return Create((TParameter)parameter);
         }
 
-        public AnonymousNavigateFactory(Func<TParameter, INavigateRequest> create)
+        public NavigateRequestFactory(Func<TParameter, INavigateRequest> create)
         {
             _create = create;
         }
