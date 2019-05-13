@@ -6,9 +6,9 @@ Example of DataTemplate-based page navigation for WPF.
 
 - Define `DataTemplate`s to define **map from view models to views** (control) in resource dictionary
 - Show views by setting view models to content of `ContentControl` (referred to as *frame*)
-- Changing content of the frame is navigation
+- Changing content of the frame is navigation, *which is done in view model layout*
 
-NOTE: You don't need `System.Windows.Controls.Frame`.
+Note that you don't need `System.Windows.Controls.Frame`.
 
 ## Mechanism
 
@@ -50,11 +50,14 @@ You can de-couple the frame and pages using `RelativeSource`. See the following 
             DataContext.NavigateCommand,
             RelativeSource={RelativeSource
                 AncestorType={x:Type layoutFrames:LayoutFrameControl}
-            }" />
+            }"
+        CommandParameter="{Binding NavigateRequest}" />
 </UserControl>
 ```
 
 Assume that the user control is a page of `LayoutFarmeControl` (with DataContext `LayoutFrame`). The `RelativeSource` binding finds a lowest ancestor of the type specified with `AncestorType`, i.e. `LayoutFrameControl`, and use it as binding source. Hence The value of the binding will be `LayoutFrameControol.DataContext.NavigateCommand` = `LayoutFrame.NavigateCommand`. That's how you can use `NavigateCommand` inside pages, without using reference to the frame.
+
+The command parameter `NavigateRequest` is something to specify where to go, which also doesn't need to know the frame.
 
 ## Naming
 
