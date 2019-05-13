@@ -14,7 +14,8 @@ namespace WpfNavigationExample.Views.LayoutFrames
     public sealed class NavigateRequest
         : INavigateRequest
     {
-        private Func<ILayoutPage> _pageCreator;
+        private readonly Func<ILayoutPage> _pageCreator;
+
         public ILayoutPage CreatePage()
         {
             return _pageCreator();
