@@ -1,6 +1,6 @@
 # WPF Navigation Example
 
-Example of page navigation system for WPF.
+Example of DataTemplate-based page navigation for WPF.
 
 ## Key items
 
@@ -8,7 +8,7 @@ Example of page navigation system for WPF.
 - Show views by setting view models to content of `ContentControl` (referred to as *frame*)
 - Changing content of the frame is navigation
 
-NOTE: You don't need `System.Windows.Frame`.
+NOTE: You don't need `System.Windows.Controls.Frame`.
 
 ## Mechanism
 
@@ -26,19 +26,19 @@ For example, you have the following in a resource dictionary:
     </DataTemplate>
 ```
 
-and put a control on window to show instance of `Foo`:
+and put a control on window to display an instance of `Foo`:
 
 ```xml
     <ContentControl Control="{Binding Foo}" />
 ```
 
-then you will see `FooControl` with DataContext is bound to the `Foo` property.
+then you will see `FooControl` with DataContext bound to the `Foo` property.
 
 See `AppResourceDictionary.xaml` for real implementation.
 
 ## CommandParameter and RelativeSource
 
-Pages in frame (a control to host pages) must dispatch some mesage to the parent frame to go to another page. The cyclic reference, "the frame know pages and the pages also know the frame", is bad for maintainability as *separate of concerns* principle.
+Pages in frame (a control to host pages) must dispatch some message to the parent frame to go to another page. The cyclic reference, "the frame know pages and the pages also know the frame", is bad for maintainability as *separate of concerns* principle.
 
 You can de-couple the frame and pages using `RelativeSource`. See the following example:
 
@@ -54,17 +54,17 @@ You can de-couple the frame and pages using `RelativeSource`. See the following 
 </UserControl>
 ```
 
-Assume that the user control is a page of `LayoutFarmeControl` (with DataContext `LayoutFrame`). The `RelativeSource` binding finds a lowest ancestor of the type specified with `AncestorType`, i.e. `LayoutFrameControl`, and use it as binding source. Hence The value of binding will be `LayoutFrameControol.DataContext.NavigateCommand` = `LayoutFrame.NavigateCommand`. That's how you can use `NavigateCommand` inside pages, without using reference to the frame.
+Assume that the user control is a page of `LayoutFarmeControl` (with DataContext `LayoutFrame`). The `RelativeSource` binding finds a lowest ancestor of the type specified with `AncestorType`, i.e. `LayoutFrameControl`, and use it as binding source. Hence The value of the binding will be `LayoutFrameControol.DataContext.NavigateCommand` = `LayoutFrame.NavigateCommand`. That's how you can use `NavigateCommand` inside pages, without using reference to the frame.
 
 ## Naming
 
-### Naming: View suffix
+### Naming: Suffix of views
 
-I'm not big fun of typical `xxxViewModel` suffix for view models. In this repository view models have no suffixes but **views have -Control suffix** (except for windows). E.g. `LayoutFrame` is a view model for corresponding view `LayoutFrameControl`.
+I'm not a big fun of typical `xxxViewModel` suffix for view models. In this repository the view models have no suffixes, but **views have -Control suffix** (except for windows). E.g. `LayoutFrame` is a view model for corresponding view `LayoutFrameControl`.
 
-### Naming: Request
+### Naming: Requests
 
-**Requests** are objects intended to be a parameter of commands. I do know this is NOT the best choice but at least makes sence.
+**Requests** are objects intended to be a parameter of commands. I know the word is NOT the best choice but at least makes sence.
 
 ## Extensibility
 
