@@ -51,9 +51,9 @@ namespace WpfNavigationExample.Views.LayoutFrames
 
         private void RefreshCommands()
         {
-            NavigateCommand.Refresh();
-            NavigateBackCommand.Refresh();
-            NavigateForwardCommand.Refresh();
+            _navigateCommand.Refresh();
+            _navigateBackCommand.Refresh();
+            _navigateForwardCommand.Refresh();
         }
 
         private void Navigate(INavigateRequest request)
@@ -67,36 +67,35 @@ namespace WpfNavigationExample.Views.LayoutFrames
             RefreshCommands();
         }
 
-        public IRaisableCommand<INavigateRequest> NavigateCommand { get; }
-        public IRaisableCommand<Unit> NavigateBackCommand { get; }
-        public IRaisableCommand<Unit> NavigateForwardCommand { get; }
+        readonly IRaisableCommand<INavigateRequest> _navigateCommand;
+        public ICommand<INavigateRequest> NavigateCommand => _navigateCommand;
+
+        readonly IRaisableCommand<Unit> _navigateBackCommand;
+        public ICommand<Unit> NavigateBackCommand => _navigateBackCommand;
+
+        readonly IRaisableCommand<Unit> _navigateForwardCommand;
+        public ICommand<Unit> NavigateForwardCommand => _navigateForwardCommand;
 
         public LayoutFrame(ILayoutPage initialPage, Models.Model model)
         {
-            var commandFactory =
-                new RaisableCommandFactory(
-                    h => CommandManager.RequerySuggested += h,
-                    h => CommandManager.RequerySuggested -= h
-                );
-
             _content = initialPage;
 
             Navigator = new Navigator<INavigation>();
 
-            NavigateCommand =
-                commandFactory.Create<INavigateRequest>(
+            _navigateCommand =
+                RaisableCommand.Create<INavigateRequest>(
                     Navigate,
                     _ => true
                 );
 
-            NavigateBackCommand =
-                commandFactory.Create(
+            _navigateBackCommand =
+                RaisableCommand.Create(
                     () => Navigator.NavigateBack(1),
                     () => Navigator.CanNavigateBack(1)
                 );
 
-            NavigateForwardCommand =
-                commandFactory.Create(
+            _navigateForwardCommand =
+                RaisableCommand.Create(
                     () => Navigator.NavigateForward(1),
                     () => Navigator.CanNavigateForward(1)
                 );
