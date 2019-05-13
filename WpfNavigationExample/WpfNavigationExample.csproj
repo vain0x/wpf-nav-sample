@@ -64,7 +64,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Collections\ListExtension.cs" />
     <Compile Include="Reactive\Commands\ICommand.cs" />
     <Compile Include="Reactive\Commands\IRaisableCommand.cs" />
     <Compile Include="Reactive\Commands\RaisableCommandFactory.cs" />

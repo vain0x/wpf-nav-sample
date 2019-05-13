@@ -1,13 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WpfNavigationExample.Reactive.Commands;
-using DotNetKit.Misc;
-using WpfNavigationExample.Collections;
-using System.ComponentModel;
 
 namespace WpfNavigationExample.Views.LayoutFrames
 {
@@ -40,7 +33,7 @@ namespace WpfNavigationExample.Views.LayoutFrames
 
             for (var i = 0; i < count; i++)
             {
-                var navigation = BackEntries.RemoveLast();
+                var navigation = ListPop(BackEntries);
                 ForwardEntries.Add(navigation);
 
                 navigation.GoBack();
@@ -59,10 +52,22 @@ namespace WpfNavigationExample.Views.LayoutFrames
 
             for (var i = 0; i < count; i++)
             {
-                var navigation = ForwardEntries.RemoveLast();
+                var navigation = ListPop(ForwardEntries);
                 BackEntries.Add(navigation);
                 navigation.GoForward();
             }
+        }
+
+        static T ListPop<T>(IList<T> list)
+        {
+            var count = list.Count;
+
+            if (count == 0)
+                throw new InvalidOperationException();
+
+            var last = list[count - 1];
+            list.RemoveAt(count - 1);
+            return last;
         }
     }
 
