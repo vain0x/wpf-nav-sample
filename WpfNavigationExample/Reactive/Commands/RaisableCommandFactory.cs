@@ -39,11 +39,6 @@ namespace WpfNavigationExample.Reactive.Commands
                 _canExecuteChanged?.Invoke(this, EventArgs.Empty);
             }
 
-            private static bool ParameterTypeIsUnit()
-            {
-                return typeof(TParameter) == typeof(Unit);
-            }
-
             public bool CanExecute(TParameter parameter)
             {
                 return _canExecute(parameter);
@@ -51,39 +46,20 @@ namespace WpfNavigationExample.Reactive.Commands
 
             public bool CanExecute(object parameter)
             {
-                if (ParameterTypeIsUnit())
-                {
-                    return CanExecute((TParameter)(object)default(Unit));
-                }
-                else
-                {
-                    return parameter is TParameter && CanExecute((TParameter)parameter);
-                }
+                return CanExecute((TParameter)parameter);
             }
 
             public void Execute(TParameter parameter)
             {
                 if (!CanExecute(parameter))
-                {
-                    throw new InvalidOperationException("コマンドを実行できません。");
-                }
+                    throw new InvalidOperationException("Can't execute command.");
 
                 _execute(parameter);
             }
 
             public void Execute(object parameter)
             {
-                if (ParameterTypeIsUnit())
-                {
-                    Execute((TParameter)(object)default(Unit));
-                }
-                else
-                {
-                    if (!(parameter is TParameter))
-                        throw new ArgumentException("parameter");
-
-                    Execute((TParameter)parameter);
-                }
+                Execute((TParameter)parameter);
             }
 
             public RaisableCommandImpl(Func<TParameter, bool> canExecute, Action<TParameter> execute, Action<EventHandler> onSubscribed, Action<EventHandler> onUnsubscribed)
