@@ -38,7 +38,7 @@ See `AppResourceDictionary.xaml` for real implementation.
 
 ## CommandParameter and RelativeSource
 
-Pages in frame (a control to host pages) must dispatch some message to the parent frame to go to another page. The cyclic reference, "the frame know pages and the pages also know the frame", is bad for maintainability as *separate of concerns* principle.
+Pages in frame (a control to host pages) must dispatch some message to the parent frame to go to another page. The cyclic reference, "the frame know pages and the pages also know the frame", is bad for maintainability as *separation of concerns* principle.
 
 You can de-couple the frame and pages using `RelativeSource`. See the following example:
 
