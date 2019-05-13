@@ -40,15 +40,15 @@ namespace WpfNavigationExample.Models.Users
 
         public bool Authenticate(string email, string password, out AuthenticatedUser authenticatedUser)
         {
-            if (password == "password")
+            if (password != "password")
             {
-                var user = _repository.FindByEmail(email);
-                authenticatedUser = new AuthenticatedUser(user, DateTime.Now);
-                return true;
+                authenticatedUser = null;
+                return false;
             }
 
-            authenticatedUser = null;
-            return false;
+            var user = _repository.FindByEmail(email);
+            authenticatedUser = new AuthenticatedUser(user, DateTime.Now);
+            return true;
         }
 
         public UserAuthenticator(UserRepository repository)
