@@ -4,9 +4,9 @@ Example of DataTemplate-based page navigation for WPF.
 
 ## Key items
 
-- Define `DataTemplate`s to define **map from view models to views** (control) in resource dictionary
+- Define `DataTemplate`s to define a **mapping from view models to views** (control) in resource dictionary
 - Show views by setting view models to content of `ContentControl` (referred to as *frame*)
-- Changing content of the frame is navigation, *which is done in view model layout*
+- Changing content of the frame is navigation, *which is done in the view model layer*
 
 Note that you don't need `System.Windows.Controls.Frame`.
 
